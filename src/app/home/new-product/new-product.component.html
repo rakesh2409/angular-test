@@ -1,0 +1,91 @@
+<p-toast></p-toast>
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+      <form [formGroup]="productForm">
+        <div class="form-group">
+          <label for="productName">Product name</label>
+          <input type="text" formControlName="productName" [ngModel]="productName" class="form-control" />
+          <div
+            *ngIf="productForm.get('productName').invalid && (productForm.get('productName').dirty || productForm.get('productName').touched)"
+            class="alert alert-danger">
+            <div *ngIf="productForm.get('productName').errors.required">
+              Product name is required.
+            </div>
+            <div *ngIf="productForm.get('productName').errors.maxlength">
+              Product name max length allowed 50 characters long.
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="productID">Product ID</label>
+          <input type="number" formControlName="productID" [ngModel]="productId" class="form-control" min="0" />
+          <div
+            *ngIf="productForm.get('productID').invalid && (productForm.get('productID').dirty || productForm.get('productID').touched)"
+            class="alert alert-danger">
+            <div *ngIf="productForm.get('productID').errors.required">
+              Product ID is required.
+            </div>
+            <div *ngIf="productForm.get('productID').errors.pattern">
+              Product ID must be at least 13 characters long.
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="productManager">Product manager</label>
+          <input type="text" formControlName="productManager" class="form-control" maxlength="30" />
+        </div>
+        <div class="row" *ngIf="productInfo">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="salesStartDate">SalesQ1</label>
+              <input type="number" formControlName="salesQ1" [ngModel]="salesQ1" class="form-control" min="0" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="salesStartDate">SalesQ2</label>
+              <input type="number" formControlName="salesQ2" [ngModel]="salesQ2" class="form-control" min="0" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="salesStartDate">SalesQ3</label>
+              <input type="number" formControlName="salesQ3" [ngModel]="salesQ3" class="form-control" min="0" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="salesStartDate">SalesQ4</label>
+              <input type="number" formControlName="salesQ4" [ngModel]="salesQ4" class="form-control" min="0" />
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="salesStartDate">Sales start date</label>
+          <p-calendar class="form-control border-0 pl-0" formControlName="salesStartDate" [(ngModel)]="date"
+            [showIcon]="true" inputId="icon">
+          </p-calendar>
+          <div
+            *ngIf="productForm.get('salesStartDate').invalid && (productForm.get('salesStartDate').dirty || productForm.get('salesStartDate').touched)"
+            class="alert alert-danger">
+            <div *ngIf="productForm.get('salesStartDate').errors.required">
+              Sales start date is required.
+            </div>
+            <div *ngIf="productForm.get('salesStartDate').errors.maxlength">
+              Sales start date must be at least 10 characters long.
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button [disabled]="productForm.invalid" (click)="submit(productForm.value)" class="btn btn-primary mr-2">
+            Submit
+          </button>
+          <button class="btn btn-secondary" [disabled]="productForm.invalid" (click)="clearForm()">
+            Clear
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
